@@ -31,7 +31,24 @@ USER root
 
 #ISED customizations go here
 
+#Create new toolkit directory
+RUN mkdir toolkit && \
+	cd toolkit
 
+#Download toolkit.zip file
+RUN curl -L -o toolkit.zip http://www.combodo.com/documentation/iTopDataModelToolkit-2.7.zip \
+	#Unzip toolkit.zip file
+	&& unzip toolkit.zip \
+	&& cd toolkit \
+	#Copy toolkit directory contents into outer directory
+	&& cp * .. \
+	#Remove all of directory's contents
+	&& rm * \
+	&& cd .. \
+	#Remove toolkit directory
+	&& rmdir toolkit \
+	#Remove toolkit.zip file
+	&& rm -f toolkit.zip
 
 #end of ISED customizations
 
